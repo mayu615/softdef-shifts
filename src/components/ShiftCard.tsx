@@ -15,19 +15,20 @@ function calculateDuration(time: string) {
 }
 
 export default function ShiftCard({ shift }: { shift: Shift }) {
-  const cls =
-    shift.status === 'Approved Leave'
-      ? 'bg-red-500'
-      : shift.status === 'Assigned'
-      ? 'bg-green-500'
-      : 'bg-gray-400'
+const cls =
+  shift.status === 'Approved Leave'
+    ? 'bg-danger shadow-warning-shadow-sm'
+    : shift.status === 'Assigned'
+    ? 'bg-success shadow-success-shadow-sm'
+    : 'bg-gray-400 shadow-sm'
 
-  return (
-    <div className={`p-2 rounded text-white text-xs ${cls}`}>
-      <div className="font-semibold">{shift.time}</div>
-      <div className="text-[11px]">{calculateDuration(shift.time)}</div>
-      <div className="text-[11px]">{shift.pay}</div>
-      <div className="text-[11px] italic">{shift.status}</div>
-    </div>
-  )
+return (
+  <div className={`p-2 rounded text-white text-b3-bold ${cls}`}>
+    <div className="font-semibold">{shift.time}</div>
+    <div className="text-b4-reg">{calculateDuration(shift.time)}</div>
+    <div className="text-b4-reg">{shift.pay}</div>
+    <div className="text-b4-italic">{shift.status}</div>
+  </div>
+)
+
 }
