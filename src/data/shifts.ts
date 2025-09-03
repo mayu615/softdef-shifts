@@ -1,3 +1,4 @@
+// src/data/shifts.ts
 export type Shift = {
   day: string
   time: string
