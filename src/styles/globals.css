@@ -1,12 +1,39 @@
-/* globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html, body, #__next {
-  height: 100%;
+/* global tokens */
+:root {
+  --bg: 255 255 255;
+  --fg: 17 24 39;
+  --brand: 124 58 237; /* purple */
+}
+.dark {
+  --bg: 14 20 32;
+  --fg: 226 232 240;
 }
 
+html, body, #__next { height: 100%; }
+
 body {
-  @apply bg-gray-100 dark:bg-dark-bg text-gray-900 dark:text-gray-100 font-inter;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+}
+
+/* small utilities used by components */
+.card {
+  @apply rounded-2xl bg-white/90 dark:bg-[#111827] border border-slate-200/40 dark:border-[#2a3246] shadow-sm;
+}
+
+/* shift card sizes and typography helpers (match tokens) */
+.text-b4-reg { font-size: 10px; line-height: 14px; font-weight: 400; }
+.text-b4-bold { font-size: 10px; line-height: 14px; font-weight: 700; }
+.text-b3-reg { font-size: 12px; line-height: 16px; font-weight: 400; }
+.text-b3-bold { font-size: 12px; line-height: 16px; font-weight: 700; }
+.text-t2-bold { font-size: 20px; line-height: 28px; font-weight: 700; }
+
+/* small responsive helpers */
+@media (max-width: 768px) {
+  aside.w-64 { width: 64px; } /* compact sidebar on mobile */
 }

@@ -1,20 +1,8 @@
 // src/data/shifts.ts
-export type Shift = {
-  day: string
-  time: string
-  status: string
-  pay: string
-}
-
-export type Employee = {
-  name: string
-  shifts: Shift[]
-}
-
-export type Group = {
-  group: string
-  employees: Employee[]
-}
+export type ShiftStatus = 'Assigned' | 'Approved Leave' | 'Warning'
+export type Shift = { day?: string; time: string; pay: string; status: ShiftStatus }
+export type Employee = { name: string; shifts: Shift[] }
+export type Group = { group: string; employees: Employee[] }
 
 export const shifts: Group[] = [
   {
@@ -23,28 +11,28 @@ export const shifts: Group[] = [
       {
         name: 'Carol',
         shifts: [
-          { day: 'Mon', time: '10:00 - 16:00', status: 'Assigned', pay: '$120' },
-          { day: 'Wed', time: '12:00 - 18:00', status: 'Approved Leave', pay: '$0' },
+          { time: '10:00 - 16:00', pay: '$120', status: 'Assigned' },
+          { time: '12:00 - 18:00', pay: '$0', status: 'Approved Leave' },
         ],
       },
       {
         name: 'John Smith',
-        shifts: [{ day: 'Tue', time: '14:00 - 20:00', status: 'Assigned', pay: '$140' }],
+        shifts: [{ time: '14:00 - 20:00', pay: '$140', status: 'Assigned' }],
       },
     ],
   },
   {
     group: 'Janitors (2)',
     employees: [
-      { name: 'Mark', shifts: [{ day: 'Thu', time: '08:00 - 14:00', status: 'Assigned', pay: '$110' }] },
-      { name: 'Lisa', shifts: [{ day: 'Fri', time: '09:00 - 15:00', status: 'Assigned', pay: '$115' }] },
+      { name: 'Mark', shifts: [{ time: '08:00 - 14:00', pay: '$110', status: 'Assigned' }] },
+      { name: 'Lisa', shifts: [{ time: '09:00 - 15:00', pay: '$115', status: 'Assigned' }] },
     ],
   },
   {
     group: 'Waiters/Waitresses (6)',
     employees: [
-      { name: 'Emily', shifts: [{ day: 'Mon', time: '10:00 - 18:00', status: 'Assigned', pay: '$130' }] },
-      { name: 'James', shifts: [{ day: 'Wed', time: '12:00 - 20:00', status: 'Assigned', pay: '$125' }] },
+      { name: 'Emily', shifts: [{ time: '10:00 - 18:00', pay: '$130', status: 'Assigned' }] },
+      { name: 'James', shifts: [{ time: '12:00 - 20:00', pay: '$125', status: 'Assigned' }] },
     ],
   },
 ]

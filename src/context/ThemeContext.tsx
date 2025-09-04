@@ -1,35 +1,32 @@
+// src/context/ThemeContext.tsx
 'use client'
-
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-type ThemeContextType = {
-  theme: 'light' | 'dark'
-  toggleTheme: () => void
-}
+type Theme = 'light' | 'dark'
+type ThemeContextType = { theme: Theme; toggleTheme: () => void }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  const [theme, setTheme] = useState<Theme>('dark')
 
   useEffect(() => {
-    // load saved theme or match system
-    const saved = typeof window !== 'undefined' ? localStorage.getItem('theme') : null
-    if (saved === 'dark') {
+    const saved = typeof window !== 'undefined' ? localStorage.getItem('softdef-theme') : null
+    if (saved === 'light' || saved === 'dark') {
+      setTheme(saved)
+      document.documentElement.classList.toggle('dark', saved === 'dark')
+    } else {
+      // default to dark (matches previous screenshots)
       setTheme('dark')
       document.documentElement.classList.add('dark')
-    } else {
-      setTheme('light')
-      document.documentElement.classList.remove('dark')
     }
   }, [])
 
   const toggleTheme = () => {
-    const next = theme === 'light' ? 'dark' : 'light'
+    const next = theme === 'dark' ? 'light' : 'dark'
     setTheme(next)
-    if (next === 'dark') document.documentElement.classList.add('dark')
-    else document.documentElement.classList.remove('dark')
-    localStorage.setItem('theme', next)
+    document.documentElement.classList.toggle('dark', next === 'dark')
+    localStorage.setItem('softdef-theme', next)
   }
 
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
